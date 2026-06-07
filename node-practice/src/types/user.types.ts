@@ -10,3 +10,8 @@ export interface CreateUserDto{
     name: string,
     email: string
 }
+
+export interface SearchUserType{
+    name?:string,
+    email?:string
+}

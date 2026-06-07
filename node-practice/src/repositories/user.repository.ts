@@ -21,6 +21,26 @@ class UserRepository{
 
        return result.insertId;
     }
+
+    async findSearchUser(name:string,email:string){
+        let sql = `select * from users where 1=1`;
+        const queryParams: string[] = [];
+        
+        if(name && name?.trim() !=''){
+            sql += ` and name like ?`;
+            queryParams.push(`${name}%`)
+        }
+
+        if(email && email?.trim() !=''){
+            sql += ` or email like ?`;
+            queryParams.push(`${email}%`)
+        }
+        const [result] = await pool.execute<User[]>(
+            sql,
+            queryParams
+        )
+        return result;
+    }
 }
 
 export default new UserRepository();
