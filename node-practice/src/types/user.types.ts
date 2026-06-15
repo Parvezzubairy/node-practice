@@ -15,3 +15,7 @@ export interface SearchUserType{
     name?:string,
     email?:string
 }
+
+export interface GetUserById{
+    userId:number
+}

@@ -24,7 +24,14 @@ export const SearchUsersSchema = z.object({
     email: z.string().optional()
 }).openapi('SearchUsers')
 
+export const GetUserByIdSchema = z.object({
+    userId:z.number()
+})
+
 export type CreateUserDto =
   z.infer<typeof CreateUserSchema>;
 export type SearchUserDto =
   z.infer<typeof SearchUsersSchema>;
+
+  export type GetUserByIdSchemaDto =
+  z.infer<typeof GetUserByIdSchema>;

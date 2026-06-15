@@ -22,7 +22,7 @@ class UserRepository{
        return result.insertId;
     }
 
-    async findSearchUser(name:string,email:string){
+    async findSearchUser(name:string,email:string):Promise<User[]>{
         let sql = `select * from users where 1=1`;
         const queryParams: string[] = [];
         
@@ -32,13 +32,22 @@ class UserRepository{
         }
 
         if(email && email?.trim() !=''){
-            sql += ` or email like ?`;
+            sql += ` and email like ?`;
             queryParams.push(`${email}%`)
         }
         const [result] = await pool.execute<User[]>(
             sql,
             queryParams
         )
+        return result;
+    }
+
+    async findUserById(userId:number):Promise<User[]>{
+        const [result] = 
+            await pool.execute<User[]>(
+                'select * from users where id=?',
+                [userId]
+            )
         return result;
     }
 }

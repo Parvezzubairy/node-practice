@@ -44,6 +44,15 @@ class UserController{
             res.status(500).json({message:"something went wrong",error:err});
         }
     }
+
+    async getUserById(
+        req: Request<{userId:number}>,
+        res: Response
+    ){
+        const result = 
+                await userservice.getUserById(req.params);
+        return res.status(200).json(result);
+    }
 }
 
 export default new UserController();

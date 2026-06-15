@@ -8,5 +8,6 @@ const router = Router();
 router.get('/',userController.getUser);
 router.post('/', validate(CreateUserSchema), userController.createUser);
 router.get('/search',userController.searchUser);
+router.get('/:userId',userController.getUserById);
 
 export default router;

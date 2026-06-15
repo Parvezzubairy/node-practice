@@ -2,7 +2,8 @@ import { registry } from "./registry";
 import {
   CreateUserSchema,
   UserSchema,
-  SearchUsersSchema
+  SearchUsersSchema,
+  GetUserByIdSchema
 } from "../schemas/user.schema";
 
 registry.registerPath({
@@ -54,6 +55,28 @@ registry.registerPath({
   tags: ["Users"],
   request: {
     query: SearchUsersSchema,
+  },
+
+  responses: {
+    200: {
+      description: "List of users",
+
+      content: {
+        "application/json": {
+          schema: UserSchema.array(),
+        },
+      },
+    },
+  },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/users/{userId}",
+
+  tags: ["Users"],
+  request: {
+    params: GetUserByIdSchema,
   },
 
   responses: {
