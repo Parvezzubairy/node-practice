@@ -15,7 +15,7 @@ export const openApiDocument =
     openapi: "3.0.0",
 
     info: {
-      title: "User API",
+      title: "PLP API",
       version: "1.0.0",
       description:
         "Node.js + Express + TypeScript API",

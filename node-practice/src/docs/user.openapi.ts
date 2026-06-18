@@ -5,12 +5,14 @@ import {
   SearchUsersSchema,
   GetUserByIdSchema
 } from "../schemas/user.schema";
+import { bearerSecurity } from "./security";
 
 registry.registerPath({
   method: "get",
   path: "/api/users",
 
   tags: ["Users"],
+  security: bearerSecurity,
 
   responses: {
     200: {
@@ -30,6 +32,7 @@ registry.registerPath({
   path: "/api/users",
 
   tags: ["Users"],
+  security: bearerSecurity,
 
   request: {
     body: {
@@ -53,6 +56,7 @@ registry.registerPath({
   path: "/api/users/search",
 
   tags: ["Users"],
+  security: bearerSecurity,
   request: {
     query: SearchUsersSchema,
   },
@@ -75,6 +79,7 @@ registry.registerPath({
   path: "/api/users/{userId}",
 
   tags: ["Users"],
+  security: bearerSecurity,
   request: {
     params: GetUserByIdSchema,
   },

@@ -4,3 +4,13 @@ import {
 
 export const registry =
   new OpenAPIRegistry();
+
+registry.registerComponent(
+  "securitySchemes",
+  "bearerAuth",
+  {
+    type: "http",
+    scheme: "bearer",
+    bearerFormat: "JWT",
+  }
+);

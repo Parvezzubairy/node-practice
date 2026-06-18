@@ -1,6 +1,7 @@
+import bcrypt from 'bcrypt'
 import userRepository from '../repositories/user.repository';
-import {CreateUserDto,SearchUserType} from '../types/user.types';
-import {GetUserByIdSchemaDto} from '../schemas/user.schema';
+import {SearchUserType} from '../types/user.types';
+import {GetUserByIdSchemaDto, CreateUserDto} from '../schemas/user.schema';
 class UserService{
 
     async getUsers(){
@@ -8,7 +9,13 @@ class UserService{
     }
 
     async craeteUser(payload:CreateUserDto){
-        return userRepository.createUser(payload);
+        const saltRounds = 10;
+        const pass = payload.password;
+        const hashedPass = await bcrypt.hash(pass,saltRounds); 
+        return userRepository.createUser({
+            ...payload,
+            password: hashedPass
+        });
     }
 
     async searchUser(payload:SearchUserType){

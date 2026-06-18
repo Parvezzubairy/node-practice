@@ -7,6 +7,7 @@ export const UserSchema = z.object({
   id: z.number(),
   name: z.string(),
   email: z.string(),
+  password: z.string()
 });
 
 export const CreateUserSchema = z.object({
@@ -16,7 +17,9 @@ export const CreateUserSchema = z.object({
     }),
     email: z.email().openapi({
         example:'parvez@gmail.com'
-    })
+    }),
+    password: z.string()
+    
 }).openapi('CreateUser')
 
 export const SearchUsersSchema = z.object({
@@ -25,7 +28,7 @@ export const SearchUsersSchema = z.object({
 }).openapi('SearchUsers')
 
 export const GetUserByIdSchema = z.object({
-    userId:z.number()
+    userId:z.number().min(1)
 })
 
 export type CreateUserDto =

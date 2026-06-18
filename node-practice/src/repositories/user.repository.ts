@@ -1,4 +1,5 @@
-import {CreateUserDto, User} from '../types/user.types';
+import {User} from '../types/user.types';
+import {CreateUserDto} from '../schemas/user.schema';
 import pool from '../config/db';
 import { ResultSetHeader } from 'mysql2';
 class UserRepository{
@@ -10,13 +11,13 @@ class UserRepository{
 
     }
 
-    async createUser(payload:CreateUserDto):Promise<number>{
+    async createUser(payload: CreateUserDto):Promise<number>{
 
        const [result] = await pool.execute<ResultSetHeader>(
-        `insert into users(name,email)
-         values(?,?)
+        `insert into users(name,email,password)
+         values(?,?,?)
         `,
-        [payload.name,payload.email]
+        [payload.name, payload.email, payload.password]
        )
 
        return result.insertId;
